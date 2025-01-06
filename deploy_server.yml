@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  vars_files:
+    - vars.yml
+  tasks:
+    - name: 'Create EC2 instances with public IP'
+      ec2_instance:
+        name: "{{ instance_name }}"
+        region: '{{ region }}'
+        key_name: munna
+        vpc_subnet_id: '{{ vpc_subnet_id }}'
+        instance_type: t2.micro
+        security_group: default
+        network:
+          assign_public_ip: true
+        image_id: '{{ image_id }}'
+        wait: yes
+      with_items: "{{ instance_name }}"
+
+
