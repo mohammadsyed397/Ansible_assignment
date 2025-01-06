@@ -9,6 +9,11 @@
 - if we want to modify the information in vars.yml we can edit the vars.yml file using the below command
 - ansible-vault edit vars.yml
 # Install dependencies
+- we have installed necessary dependencies on target severs using Ansible playbooks
+  # ROLES
+  - created roles for flask_web and mysql_db
+  # configure application'
+  - configured application using the roles flask_web and mysql_db 
 
 
 
