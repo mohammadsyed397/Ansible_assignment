@@ -4,4 +4,7 @@ image_id: image_id
 vpc_subnet_id: subnet id
 aws_access_key: access_key of your aws account
 aws_secret_key: secret key
-~
+
+db_name: employee_db
+db_user: db_user
+db_user_password: Passw0rd
