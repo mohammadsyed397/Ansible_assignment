@@ -1,0 +1,8 @@
+instance_name:
+  - target-1
+  - target-2
+region: "us-east-2"
+instance_type: "t2.micro"
+image_id: image_id 
+vpc_subnet_id: subnet id
+~
