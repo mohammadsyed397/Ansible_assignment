@@ -1,0 +1,46 @@
+---
+- name: Install Python3 and create a virtual environment
+  become: yes
+  package:
+    name:
+      - python3
+      - python3-venv
+      - python3-pip
+    state: present
+
+- name: Create a virtual environment for Python packages
+  command:
+    cmd: python3 -m venv /opt/simple-webapp/venv
+    creates: /opt/simple-webapp/venv/bin/activate
+
+- name: Install Flask and flask-mysql in the virtual environment
+  pip:
+    name: "{{ item }}"
+    state: present
+    executable: /opt/simple-webapp/venv/bin/pip
+  with_items:
+    - flask
+    - flask-mysql
+- name: Remove the existing source code directory
+  become: yes
+  file:
+    path: /opt/simple-webapp
+    state: absent
+
+- name: Clone the repository
+  git:
+    repo: 'https://github.com/mmumshad/simple-webapp.git'
+    dest: /opt/simple-webapp
+
+
+- name: Set MYSQL_DATABASE_HOST and FLASK_APP environment variables and run Flask
+  debug:
+    msg: "MYSQL_DATABASE_HOST={{ hostvars[groups['db_servers'][0]]['ansible_host'] }} FLASK_APP=/opt/simple-webapp/app.py nohup /opt/simple-webapp/venv/bin/flask run --host=0.0.0.0 --port=80 &"
+
+- name: Start Flask Web Server
+  shell: |
+    MYSQL_DATABASE_HOST={{ hostvars[groups['db_servers'][0]]['ansible_host'] }} FLASK_APP=/opt/simple-webapp/app.py nohup /opt/simple-webapp/venv/bin/flask run --host=0.0.0.0 --port=80 &
+  args:
+    executable: /bin/bash
+
+  
