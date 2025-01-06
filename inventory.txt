@@ -1,9 +1,0 @@
-target-1 ansible_host=3.21.39.223 ansible_connection=ssh ansible_user=ubuntu  ansible_ssh_private_key_file=./munna.pem
-target-2 ansible_host=18.221.204.125 ansible_connection=ssh ansible_user=ubuntu  ansible_ssh_private_key_file=./munna.pem
-
-[web_servers]
- target-1
-
-[db_servers]
-target-2
-
