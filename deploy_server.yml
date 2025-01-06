@@ -6,7 +6,9 @@
   tasks:
     - name: 'Create EC2 instances with public IP'
       ec2_instance:
-        name: "{{ instance_name }}"
+        aws_access_key: '{{ aws_access_key }}'
+        aws_secret_key: '{{aws_secret_key}}'
+        name: "{{ item }}"
         region: '{{ region }}'
         key_name: munna
         vpc_subnet_id: '{{ vpc_subnet_id }}'
@@ -16,6 +18,8 @@
           assign_public_ip: true
         image_id: '{{ image_id }}'
         wait: yes
-      with_items: "{{ instance_name }}"
+      with_items: 
+        - target-1
+        - target-2
 
 
