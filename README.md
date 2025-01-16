@@ -12,7 +12,7 @@
 - we have installed necessary dependencies on target severs using Ansible playbooks
   # ROLES
   - created roles for flask_web and mysql_db
-  # configure application'
+  # configure application
   - configured application using the roles flask_web and mysql_db 
 
 
